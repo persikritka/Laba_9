@@ -5,6 +5,14 @@ import series.Series;
 public class Exponential extends Series {
     private int differenceOfExponentialProgression;
 
+    public Exponential(){};
+
+    public Exponential(int firstElement, int numberOfElement, int differenceOfExponentialProgression) {
+        this.firstElement = firstElement;
+        this.numberOfElement = numberOfElement;
+        this.differenceOfExponentialProgression = differenceOfExponentialProgression;
+    }
+
 
     public void setDifferenceOfExponentialProgression(int differenceOfExponentialProgression) {
         this.differenceOfExponentialProgression = differenceOfExponentialProgression;
@@ -71,7 +79,7 @@ public class Exponential extends Series {
     public String toString() {
         String result = "";
         for(int i = 0; i < numberOfElement; i++) {
-            result += (i+1) + " element: " + calculatingElement(i) + "\n";
+            result += (i+1) + " element: " + calculatingElement(i) + "; ";
         }
         return result;
     }

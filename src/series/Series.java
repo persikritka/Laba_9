@@ -21,10 +21,10 @@ public abstract class Series {
         return null;
     }
 
-    public void savingToFile(Object obj) {
+    public void savingToFile(Object obj, String nameOfFile) {
         if(obj.getClass() == Liner.class) {
             Liner liner = (Liner)obj;
-            try(FileWriter filewriter = new FileWriter("series.txt", false)) {
+            try(FileWriter filewriter = new FileWriter(nameOfFile, false)) {
                 String linerString = liner.toString();
                 filewriter.write(linerString);
                 String sumOfLinearSeries = "Sum of linear series: " + Integer.toString(liner.sum());
@@ -36,7 +36,7 @@ public abstract class Series {
             }
         } else if (obj.getClass() == Exponential.class) {
             Exponential exponential = (Exponential)obj;
-            try(FileWriter filewriter = new FileWriter("series.txt", false)) {
+            try(FileWriter filewriter = new FileWriter(nameOfFile, false)) {
                 String exponentialString = exponential.toString();
                 filewriter.write(exponentialString);
                 String sumOfExponentialSeries = "Sum of exponential series: " + Integer.toString(exponential.sum());

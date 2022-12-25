@@ -6,6 +6,14 @@ public class Liner extends Series {
 
     private int differenceOfArithmeticProgression;
 
+    public Liner(){};
+
+    public Liner(int firstElement, int numberOfElement, int differenceOfArithmeticProgression) {
+        this.firstElement = firstElement;
+        this.numberOfElement = numberOfElement;
+        this.differenceOfArithmeticProgression = differenceOfArithmeticProgression;
+    }
+
     public void setDifferenceOfArithmeticProgression(int differenceOfArithmeticProgression) {
         this.differenceOfArithmeticProgression = differenceOfArithmeticProgression;
     }
@@ -71,7 +79,7 @@ public class Liner extends Series {
     public String toString() {
         String result = "";
         for(int i = 0; i < numberOfElement; i++) {
-            result += (i+1) + " element: " + calculatingElement(i) + "\n";
+            result += (i+1) + " element: " + calculatingElement(i) + "; ";
         }
         return result;
     }
