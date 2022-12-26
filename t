@@ -1,1 +1,3 @@
-1 element: 1; 2 element: 3; 3 element: 5; 4 element: 7; 5 element: 9; Sum of linear series: 25
+(1, 2, 4, 8, 16)
+
+Sum of exponential series: 31

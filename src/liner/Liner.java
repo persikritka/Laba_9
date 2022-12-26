@@ -77,10 +77,14 @@ public class Liner extends Series {
 
     @Override
     public String toString() {
-        String result = "";
+        String result = "(";
         for(int i = 0; i < numberOfElement; i++) {
-            result += (i+1) + " element: " + calculatingElement(i) + "; ";
+            if(i == (numberOfElement - 1) )
+                result += calculatingElement(i);
+            if(i < (numberOfElement - 1))
+                result += (calculatingElement(i) + ", ");
         }
+        result += ")";
         return result;
     }
 }

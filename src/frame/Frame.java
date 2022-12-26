@@ -7,12 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class Frame extends JFrame {
     private static int numberOfElement;
-    private static String chooseSeries;
     private static int itemElement;
     private static int firstElement;
     private static int differenceOfSeries;
@@ -28,76 +25,68 @@ public class Frame extends JFrame {
 
     public Frame() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(100, 100, 500, 300);
+        setBounds(100, 100, 700, 500);
 
-        JPanel panel = new JPanel(new FlowLayout());
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        GridLayout gridLayout = new GridLayout(0, 2, 10, 12);
+        panel.setLayout(gridLayout);
         JLabel numberOfElementLabel = new JLabel("Enter the number of elements of the progression");
         panel.add(numberOfElementLabel);
-        JTextField numberOfElementField = new JTextField(10);
+        JTextField numberOfElementField = new JTextField(5);
         panel.add(numberOfElementField);
-        JButton okNumber = new JButton("OK");
-        panel.add(okNumber);
-        okNumber.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                numberOfElement = Integer.parseInt(numberOfElementField.getText());
-            }
-        });
 
         JLabel firstElementLabel = new JLabel("Enter first element");
         panel.add(firstElementLabel);
-        JTextField firstElementField = new JTextField(30);
+        JTextField firstElementField = new JTextField(5);
         panel.add(firstElementField);
-        JButton okElement = new JButton("OK");
-        panel.add(okElement);
-        okElement.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                firstElement = Integer.parseInt(firstElementField.getText());
-            }
-        });
 
         JLabel differenceOfSeriesLabel = new JLabel("Enter difference of progression");
         panel.add(differenceOfSeriesLabel);
-        JTextField differenceOfSeriesField = new JTextField(20);
+        JTextField differenceOfSeriesField = new JTextField(5);
         panel.add(differenceOfSeriesField);
-        JButton differenceOfSeriesButton = new JButton("OK");
-        panel.add(differenceOfSeriesButton);
-        differenceOfSeriesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                differenceOfSeries = Integer.parseInt(differenceOfSeriesField.getText());
-            }
-        });
 
         JLabel itemElementLabel = new JLabel("Enter the number of the progression element");
         panel.add(itemElementLabel);
-        JTextField itemElementField = new JTextField(10);
+        JTextField itemElementField = new JTextField(5);
         panel.add(itemElementField);
-        JButton itemElementButton = new JButton("OK");
-        panel.add(itemElementButton);
-        itemElementButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                itemElement = Integer.parseInt(itemElementField.getText());
-            }
-        });
 
         JLabel nameOfFileLabel = new JLabel("Enter the name of file");
         panel.add(nameOfFileLabel);
-        JTextField nameOfFileField = new JTextField(10);
+        JTextField nameOfFileField = new JTextField(5);
         panel.add(nameOfFileField);
-        JButton nameOfFileButton = new JButton("OK");
-        panel.add(nameOfFileButton);
-        nameOfFileButton.addActionListener(new ActionListener() {
+
+        JButton okElement = new JButton("OK");
+        panel.add(okElement);
+
+
+        okElement.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    firstElement = Integer.parseInt(firstElementField.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(panel, "Please, enter the correct first element");
+                }
+                try {
+                    numberOfElement = Integer.parseInt(numberOfElementField.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(panel, "Please, enter the correct number of elements of the progression");
+                }
+                try {
+                    differenceOfSeries = Integer.parseInt(differenceOfSeriesField.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(panel, "Please, enter the correct, difference of Series");
+                }
+                try {
+                    itemElement = Integer.parseInt(itemElementField.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(panel, "Please, enter the correct number of progression element");
+                }
                 nameOfFile = nameOfFileField.getText();
             }
         });
 
         box = new JComboBox<>(series);
-        //panel.add(box);
         box.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,6 +95,11 @@ public class Frame extends JFrame {
                         panel.remove(elementsLabelEx);
                         panel.remove(elementsEx);
                         panel.remove(itemOfElementsEx);
+                    }
+                    if(elementsLabel != null && elements != null && itemOfElements != null) {
+                        panel.remove(elementsLabel);
+                        panel.remove(elements);
+                        panel.remove(itemOfElements);
                     }
                     Liner liner = new Liner(firstElement, numberOfElement, differenceOfSeries);
                     liner.savingToFile(liner, nameOfFile);
@@ -124,6 +118,11 @@ public class Frame extends JFrame {
                         panel.remove(elements);
                         panel.remove(itemOfElements);
                     }
+                    if(elementsLabelEx != null && elementsEx != null && itemOfElementsEx != null) {
+                        panel.remove(elementsLabelEx);
+                        panel.remove(elementsEx);
+                        panel.remove(itemOfElementsEx);
+                    }
                     Exponential exponential = new Exponential(firstElement, numberOfElement, differenceOfSeries);
                     exponential.savingToFile(exponential, nameOfFile);
                     elementsLabelEx = new JLabel("Elements of series: ");
@@ -139,6 +138,7 @@ public class Frame extends JFrame {
 
         panel.add(box);
         add(panel);
+        pack();
         setVisible(true);
     }
 }

@@ -1,1 +1,0 @@
-1 element: 1; 2 element: 2; 3 element: 4; 4 element: 8; 5 element: 16; Sum of exponential series: 31

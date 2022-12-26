@@ -39,6 +39,7 @@ public abstract class Series {
             try(FileWriter filewriter = new FileWriter(nameOfFile, false)) {
                 String exponentialString = exponential.toString();
                 filewriter.write(exponentialString);
+                filewriter.write(System.lineSeparator());
                 String sumOfExponentialSeries = "Sum of exponential series: " + Integer.toString(exponential.sum());
                 filewriter.write(sumOfExponentialSeries);
                 filewriter.flush();
